@@ -29,7 +29,7 @@ function destructibleBlock(x,y){
             this.timer = 0;
         }
         
-        if(this.blockImage.src == "https://localhost//bomber-kids-2/javascript/flame_2.png"){
+        if(this.blockImage.src == "https://localhost//bomber-kids/javascript/flame_2.png"){
             this.timer++;  
             console.log(this.blockImage.src);
         }
