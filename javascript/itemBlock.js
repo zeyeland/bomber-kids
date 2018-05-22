@@ -1,5 +1,6 @@
 var blockArray = [];
 
+//function must be called before map can render properly
 function loadBlocksInObjectGrid(){
     console.log("Map has been loaded");
     for(var y=0; y<15 ; y++){
@@ -12,9 +13,10 @@ function loadBlocksInObjectGrid(){
 }
 
 function destructibleBlock(x,y){
+    //cordinates are passed in array index for and thereby needed multiply by canvasblock
     this.x = x * canvasWIDTHblock;
     this.y = y * canvasHEIGHTblock;
-    //this.timerStart = false;
+    this.exploding = false;
     this.timer = 0;
     this.blockImage = new Image();
     this.blockImage.src = "assets/orc_11.png";
@@ -23,21 +25,24 @@ function destructibleBlock(x,y){
     blockArray.push(this);
 
     this.update = function(){
-        if(this.timer > 5){
-            //this.blockImage.src = "assets/orc_11.png";
-            objectGrid[this.y/canvasHEIGHTblock][this.x/canvasWIDTHblock] = 0;
-            this.timer = 0;
+        //if statement is ran if the block is destoried
+        if(this.timer > 5 && this.exploding == false){
+            //objectGrid[this.y/canvasHEIGHTblock][this.x/canvasWIDTHblock] =0
+            this.exploding = true;
+            generateItemChance(this.x, this.y);
+            //this.timer = 0;
         }
         
-        if(this.blockImage.src == "https://localhost//bomber-kids/javascript/flame_2.png"){
+        if(this.blockImage.src == "https://localhost//bomber-kids/assets/passed_sprites/shatter_Block.png"){
             this.timer++;  
-            console.log(this.blockImage.src);
+            //console.log(this.blockImage.src);
         }
         drawItemBlock(this);
     }
 
     this.updateTWO = function(){
-        this.blockImage.src = "javascript/flame_2.png";
+        this.blockImage.src = "assets/passed_sprites/shatter_Block.png";
+        //console.log(this.blockImage.src);
     }
 }
 function drawItemBlock(blockObject){

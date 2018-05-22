@@ -11,8 +11,9 @@ document.querySelector('main').appendChild(canvas);
 
 function update(){
 	drawMapGrid();
-	scanObjectGrid();
 	player1.update();
+	scanObjectGrid();
+	//player1.update();
 }
 
 setInterval(update,40);

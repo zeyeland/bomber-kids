@@ -33,6 +33,9 @@ function scanObjectGrid(){
             if( bombArray.includes(objectGrid[y][x]) ){
                 objectGrid[y][x].update();
             }
+            if( itemsList.includes(objectGrid[y][x]) ){
+                objectGrid[y][x].update();
+            }
         }
     }
 }

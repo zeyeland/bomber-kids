@@ -5,12 +5,33 @@ function checkMapTileCollisions(direction, focusObject){
 
   var checkWall = checkWallCollisions(direction, focusObject);
   var checkItemBlocks = checkItemBlocksCollisions(direction, focusObject);
+  var check4Bomb = check4Bombs(direction, focusObject);
 
-  if(checkWall == true || checkItemBlocks == true)
+  if(checkWall == true || checkItemBlocks == true || check4Bomb ==true)
   {
     return true
   }
   else return false;
+}
+
+function check4Bombs(direction, focusObject){
+  //console.log("checking for bombs");
+  if(direction == "ABOVE" &&  bombArray.includes(
+    objectGrid[focusObject.y/canvasHEIGHTblock-1][focusObject.x/canvasWIDTHblock])  ){
+    return true;
+  }
+  if(direction == "BELOW" &&  bombArray.includes(
+    objectGrid[focusObject.y/canvasHEIGHTblock+1][focusObject.x/canvasWIDTHblock])  ){
+    return true;
+  }
+  if(direction == "RIGHT" &&  bombArray.includes(
+    objectGrid[focusObject.y/canvasHEIGHTblock][focusObject.x/canvasWIDTHblock+1])  ){
+    return true;
+  }
+  if(direction == "LEFT" &&  bombArray.includes(
+    objectGrid[focusObject.y/canvasHEIGHTblock][focusObject.x/canvasWIDTHblock-1])  ){
+    return true;
+  }
 }
 
 function checkWallCollisions(direction,focusObject){
@@ -62,28 +83,7 @@ function explodeCollisions(direction,focusObject,z){
   else return false;
 }
 
-/*function unexplodeCollisions(direction,focusObject,z){
-  //console.log("block blow up");
-  if(direction == "ABOVE" && ( objectGrid[focusObject.y/canvasHEIGHTblock-z][focusObject.x/canvasWIDTHblock] == 1 || mapGrid[focusObject.y/canvasHEIGHTblock-z][focusObject.x/canvasWIDTHblock] == 8 || mapGrid[focusObject.y/canvasHEIGHTblock-z][focusObject.x/canvasWIDTHblock] == 9) ){
-    //objectGrid[focusObject.y/canvasHEIGHTblock-z][focusObject.x/canvasWIDTHblock] = 0;
-    return true;
-  }
-  if(direction == "BELOW" && ( objectGrid[focusObject.y/canvasHEIGHTblock+z][focusObject.x/canvasWIDTHblock] == 1 || mapGrid[focusObject.y/canvasHEIGHTblock+z][focusObject.x/canvasWIDTHblock] == 8 ||  mapGrid[focusObject.y/canvasHEIGHTblock+z][focusObject.x/canvasWIDTHblock] == 9) ){
-    //objectGrid[focusObject.y/canvasHEIGHTblock+z][focusObject.x/canvasWIDTHblock] = 0;
-    return true;
-  }
-  if(direction == "RIGHT" && ( objectGrid[focusObject.y/canvasHEIGHTblock][focusObject.x/canvasWIDTHblock+z] == 1 || mapGrid[focusObject.y/canvasHEIGHTblock][focusObject.x/canvasWIDTHblock+z] == 8 ||  mapGrid[focusObject.y/canvasHEIGHTblock][focusObject.x/canvasWIDTHblock+z] == 9) ){
-    //objectGrid[focusObject.y/canvasHEIGHTblock][focusObject.x/canvasWIDTHblock+z] = 0;
-    return true;
-  }
-  if(direction == "LEFT" && ( objectGrid[focusObject.y/canvasHEIGHTblock][focusObject.x/canvasWIDTHblock-z] == 1 || mapGrid[focusObject.y/canvasHEIGHTblock][focusObject.x/canvasWIDTHblock-z] == 8 ||  mapGrid[focusObject.y/canvasHEIGHTblock][focusObject.x/canvasWIDTHblock-z] == 9) ){
-    //objectGrid[focusObject.y/canvasHEIGHTblock][focusObject.x/canvasWIDTHblock-z] = 0;
-    return true;
-  }
-  
-  return false;
-}*/
-
+//the function looks for bomb fire to other placed bombs collisions
 function bomb2FireCollisions(direction,focusObject,z){
   
   if(direction == "ABOVE" &&  bombArray.includes(objectGrid[focusObject.y/canvasHEIGHTblock-z][focusObject.x/canvasWIDTHblock])  ){
