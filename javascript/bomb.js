@@ -50,7 +50,7 @@ function droppedBombRED(x,y,power){
     this.update = function(){
         
         if(this.timer > 50){
-            bombExplodeRED(this);
+            bombExplodeRED(this,1);
             player1.bombCapacity ++;
         }
     this.timer ++;
@@ -75,7 +75,7 @@ function droppedBombGREY(x,y,power){
     this.update = function(){
         
         if(this.timer > 50){
-            bombExplode2(this,"GREY");
+            bombExplode(this,"GREY");
             player1.bombCapacity ++;
         }
     this.timer ++;
@@ -100,7 +100,7 @@ function droppedBombBLUE(x,y,power){
     this.update = function(){
         
         if(this.timer > 50){
-            bombExplode2(this,"BLUE");
+            bombExplode(this,"BLUE");
             player1.bombCapacity ++;
         }
     this.timer ++;
@@ -109,32 +109,33 @@ function droppedBombBLUE(x,y,power){
 
 }//end of bomb object
 
-function fire(x,y,power){
+function droppedBombGREEN(x,y,power){
+    
     this.x = x;
     this.y = y;
     this.power = power;
     this.timer = 0;
-    this.firePic = new Image();
-    this.firePic.src = "assets/passed_sprites/cloud_fire_2.png";
-    this.hitPlayer = false;
-
+    this.bombImage = new Image();
+    this.bombImage.src = "assets/passed_sprites/bombGreen.png";
+    
+    player1.bombCapacity --;
     objectGrid[this.y/canvasHEIGHTblock][this.x/canvasWIDTHblock] = this;
-    fireArray.push(this);
+    bombArray.push(this);
     
     this.update = function(){
-        if(this.x == player1.x && this.y == player1.y && this.hitPlayer == false){
-            this.hitPlayer = true;
-            player1.hearts--;
-        }
-        if(this.timer > 10){
-            objectGrid[this.y/canvasHEIGHTblock][this.x/canvasWIDTHblock] = 0;    
+        
+        if(this.timer > 50){
+            bombExplode(this,"GREEN");
+            player1.bombCapacity ++;
         }
     this.timer ++;
-    drawFire(this);
+    drawBomb(this);
     }//end of update
-}
 
-function fireUnique(x,y,power,mapID){
+}//end of bomb object
+
+
+function fire(x,y,power,mapID){
     this.x = x;
     this.y = y;
     this.power = power;
@@ -156,7 +157,8 @@ function fireUnique(x,y,power,mapID){
         }
         if(this.timer > 10){
             if(this.mapID != null && this.mapID != false ){
-                mapGrid[this.y/canvasHEIGHTblock][this.x/canvasWIDTHblock] = this.mapID       
+                mapGrid[this.y/canvasHEIGHTblock][this.x/canvasWIDTHblock] = this.mapID  
+                //console.log(this.mapID);     
             }
             objectGrid[this.y/canvasHEIGHTblock][this.x/canvasWIDTHblock] = 0;    
         }
@@ -165,9 +167,9 @@ function fireUnique(x,y,power,mapID){
     }//end of update
 }
 
-function bombExplode(bombObject){
+function bombExplode(bombObject,mapID){
     
-    var newFire = new fire(bombObject.x,bombObject.y,bombPower);
+    var newFire = new fire(bombObject.x,bombObject.y,bombPower,mapID);
     //objectGrid[bombObject.y/canvasHEIGHTblock][bombObject.x/canvasWIDTHblock] = newFire;
     var bombPower = bombObject.power;
     var stopUp = false;
@@ -190,65 +192,24 @@ function bombExplode(bombObject){
         }
         /////////////////////////
         if( stopUp == false && explodeCollisions('ABOVE',bombObject,z) == false){
-            var newFire = new fire(bombObject.x,bombObject.y-(canvasHEIGHTblock*z),bombPower);
+            var newFire = new fire(bombObject.x,bombObject.y-(canvasHEIGHTblock*z),bombPower,mapID);
         }
         if(stopDown == false && explodeCollisions('BELOW',bombObject,z) == false){
-            var newFire = new fire(bombObject.x,bombObject.y+(canvasHEIGHTblock*z),bombPower);
+            var newFire = new fire(bombObject.x,bombObject.y+(canvasHEIGHTblock*z),bombPower,mapID);
         }
         if(stopLeft == false && explodeCollisions('LEFT',bombObject,z) == false){
-            var newFire = new fire(bombObject.x-(canvasWIDTHblock*z),bombObject.y,bombPower);           
+            var newFire = new fire(bombObject.x-(canvasWIDTHblock*z),bombObject.y,bombPower,mapID);           
         }
         if(stopRight == false &&explodeCollisions('RIGHT',bombObject,z) == false){
-            var newFire = new fire(bombObject.x+(canvasWIDTHblock*z),bombObject.y,bombPower);
-            
-        }    
-    }
-}
-
-//this bombExplode2 functions supports unique fire
-function bombExplode2(bombObject,mapID){
-    
-    var newFire = new fireUnique(bombObject.x,bombObject.y,bombPower,mapID);
-    //objectGrid[bombObject.y/canvasHEIGHTblock][bombObject.x/canvasWIDTHblock] = newFire;
-    var bombPower = bombObject.power;
-    var stopUp = false;
-    var stopDown = false;
-    var stopLeft = false;
-    var stopRight = false;
-    
-    for(var z=1; z<=bombPower; z++ ){
-        if(stopUp == false && explodeCollisions('ABOVE',bombObject,z) == true){
-            stopUp = true;
-        }
-        if(stopDown == false && explodeCollisions('BELOW',bombObject,z) == true){
-            stopDown = true;
-        }
-        if(stopLeft == false && explodeCollisions('LEFT',bombObject,z) == true){
-            stopLeft = true;
-        }
-        if(stopRight == false && explodeCollisions('RIGHT',bombObject,z) == true){
-            stopRight = true;
-        }
-        /////////////////////////
-        if( stopUp == false && explodeCollisions('ABOVE',bombObject,z) == false){
-            var newFire = new fireUnique(bombObject.x,bombObject.y-(canvasHEIGHTblock*z),bombPower,mapID);
-        }
-        if(stopDown == false && explodeCollisions('BELOW',bombObject,z) == false){
-            var newFire = new fireUnique(bombObject.x,bombObject.y+(canvasHEIGHTblock*z),bombPower,mapID);
-        }
-        if(stopLeft == false && explodeCollisions('LEFT',bombObject,z) == false){
-            var newFire = new fireUnique(bombObject.x-(canvasWIDTHblock*z),bombObject.y,bombPower,mapID);           
-        }
-        if(stopRight == false &&explodeCollisions('RIGHT',bombObject,z) == false){
-            var newFire = new fireUnique(bombObject.x+(canvasWIDTHblock*z),bombObject.y,bombPower,mapID);
+            var newFire = new fire(bombObject.x+(canvasWIDTHblock*z),bombObject.y,bombPower,mapID);
             
         }    
     }
 }
 
 //this bombexplode is special for RED BOMBS
-function bombExplodeRED(bombObject){
-    var newFire = new fire(bombObject.x,bombObject.y,bombPower);
+function bombExplodeRED(bombObject,mapID){
+    var newFire = new fire(bombObject.x,bombObject.y,bombPower,mapID);
 
     var bombPower = bombObject.power;
 
@@ -285,7 +246,7 @@ function bombExplodeRED(bombObject){
                 objectGrid[tempStartingY][tempStartingX] = 0;
             }
             if( objectGrid[tempStartingY][tempStartingX] == 0 ){
-                var newFire = new fire(tempStartingX*canvasWIDTHblock, tempStartingY*canvasHEIGHTblock ,bombPower);
+                var newFire = new fire(tempStartingX*canvasWIDTHblock, tempStartingY*canvasHEIGHTblock ,bombPower,mapID);
             }
             
         }

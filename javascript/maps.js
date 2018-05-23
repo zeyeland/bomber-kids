@@ -1,11 +1,11 @@
 var tileNine = new Image();  // 1
-tileNine.src = "assets/stone_2_dark0.png";
+tileNine.src = "assets/tiles/unseen.png";
 
-var tileEight = new Image();  // 9
+var tileEight = new Image();  // 8
 tileEight.src = "assets/stone_2_gray0.png";
 
-var tileZero = new Image();  // 9
-tileZero.src = "assets/grass_2.png";
+var tileZero = new Image();  // 0
+tileZero.src = "assets/tiles/metal_wall.png";
 
 
 /* these are the tiles for unique fires on mapGrid */
@@ -15,6 +15,9 @@ tileZero.src = "assets/grass_2.png";
 
 	var tileWater = new Image();
 	tileWater.src = "assets/passed_sprites/water_2.png";
+
+	var tileGrass = new Image();
+	tileGrass.src = "assets/grass_2.png";
 
 //////////////////////////
 
@@ -49,6 +52,9 @@ function drawMapGrid(){
 			if(mapGrid[rowYcount][columnXcount] == 0){
 				ctx.drawImage(tileZero,columnXcount*canvasWIDTHblock,rowYcount*canvasHEIGHTblock,canvasWIDTHblock,canvasHEIGHTblock);
 			}
+			if(mapGrid[rowYcount][columnXcount] == 1){
+				ctx.drawImage(tileZero,columnXcount*canvasWIDTHblock,rowYcount*canvasHEIGHTblock,canvasWIDTHblock,canvasHEIGHTblock);
+			}
 			//// these if statements are for unique fires
 			if(mapGrid[rowYcount][columnXcount] == "GREY"){
 				ctx.drawImage(tileFire,columnXcount*canvasWIDTHblock,rowYcount*canvasHEIGHTblock,canvasWIDTHblock,canvasHEIGHTblock);
@@ -63,6 +69,12 @@ function drawMapGrid(){
 					player1.bombCapacity++;
 				}
 			}
-		}
-	}
-}
+			if(mapGrid[rowYcount][columnXcount] == "GREEN"){
+				ctx.drawImage(tileGrass,columnXcount*canvasWIDTHblock,rowYcount*canvasHEIGHTblock,canvasWIDTHblock,canvasHEIGHTblock);
+				if( bombArray.includes(objectGrid[rowYcount][columnXcount]) ){
+					objectGrid[rowYcount][columnXcount].bombImage.src = "";
+				}
+			}
+		}//end of inner for
+	}//end of outer for
+}//end of drawMapGrid

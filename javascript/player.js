@@ -8,6 +8,8 @@ function playerComponnet(){
     this.playerImage = new Image(); //player img with src
     this.playerImage.src = "assets/player_Sprites/playerChill-Right.png";
 
+    this.bombType = 0;
+    this.bombsAwayArray = [];
     //
     this.power = 1;
     this.hearts = 100;
@@ -23,11 +25,29 @@ function playerComponnet(){
     this.update = function(){
         var parentThis = this;
         document.onkeydown = function(e) { //detects movement with keys strokes
-            //console.log("The player y is: " + player1.y);  
+            
             switch (e.keyCode) {
                 case 77: //debuging key M 
                 console.log("this key(M) is for testing");
+                parentThis.bombType = "BLUE";
                 break;
+                case 78: //debuging key N 
+                console.log("this key(N) is for testing");
+                parentThis.bombType = "GREY";
+                break;
+                case 66: //debuging key  
+                console.log("this key(B) is for testing");
+                parentThis.bombType = "RED";
+                break;
+                case 86: //debuging key M 
+                console.log("this key(V) is for testing");
+                parentThis.bombType = "GREEN";
+                break;
+                case 67: //debuging key M 
+                console.log("this key(C) is for testing");
+                parentThis.bombType = 0;
+                break;
+                ////////////////////////
                 case 37:
                 if(parentThis.lookLeft == true){
                     
@@ -98,15 +118,18 @@ function playerComponnet(){
                     break;
                 case 32:
                 //create bomb object 2 be droppped if player has a bomb ready
-                if(parentThis.bombCapacity > 0){
-                    //var bomb007 = new droppedBomb(parentThis.x,parentThis.y,parentThis.power);
-                    //var bomb007 = new droppedBombRED(parentThis.x,parentThis.y,parentThis.power);
-                    //var bomb007 = new droppedBombGREY(parentThis.x,parentThis.y,parentThis.power);
-                    var bomb007 = new droppedBombBLUE(parentThis.x,parentThis.y,parentThis.power);
-                }else{
-                    console.log("no bombs alvailable");
-                }
-                    
+                //console.log("the array size is: " +player1.bombsAwayArray.length);
+                if(parentThis.bombsAwayArray.length > 0){
+                    var tempBomb = parentThis.bombsAwayArray.pop();
+                    console.log("temp bomb was popped: " + tempBomb);
+                    dropBomb(tempBomb,parentThis);
+                }else if(parentThis.bombsAwayArray.length < 1){
+                    if(parentThis.bombCapacity > 0){
+                        var bomb007 = new droppedBomb(parentThis.x,parentThis.y,parentThis.power);
+                    }else{
+                        console.log("no bombs alvailable");
+                    }
+                }   
                 break;
             }//end of key up switch
         }//end of keyup function
@@ -128,6 +151,23 @@ function checkPlayerHealth(playerObject){
         console.log("you have been hit ; game over");
         playerObject.x = 0;
         playerObject.y = 0;
+    }
+}
+
+function dropBomb(bombType,parentThis){
+    switch(bombType) {
+        case "RED":
+        var bomb007 = new droppedBombRED(parentThis.x,parentThis.y,parentThis.power);
+            break;
+        case "BLUE":
+        var bomb007 = new droppedBombBLUE(parentThis.x,parentThis.y,parentThis.power);
+            break;
+        case "GREY":
+        var bomb007 = new droppedBombGREY(parentThis.x,parentThis.y,parentThis.power);
+            break;
+        case "GREEN":
+            var bomb007 = new droppedBombGREEN(parentThis.x,parentThis.y,parentThis.power);
+            break;    
     }
 }
 
