@@ -8,11 +8,11 @@ function playerComponnet(){
     this.playerImage = new Image(); //player img with src
     this.playerImage.src = "assets/player_Sprites/playerChill-Right.png";
 
-    this.bombType = 0;
+    //this.bombType = 0;
     this.bombsAwayArray = [];
     //
     this.power = 1;
-    this.hearts = 100;
+    this.hearts = 1;
     this.bombCapacity = 1;
     //
     
@@ -29,23 +29,6 @@ function playerComponnet(){
             switch (e.keyCode) {
                 case 77: //debuging key M 
                 console.log("this key(M) is for testing");
-                parentThis.bombType = "BLUE";
-                break;
-                case 78: //debuging key N 
-                console.log("this key(N) is for testing");
-                parentThis.bombType = "GREY";
-                break;
-                case 66: //debuging key  
-                console.log("this key(B) is for testing");
-                parentThis.bombType = "RED";
-                break;
-                case 86: //debuging key M 
-                console.log("this key(V) is for testing");
-                parentThis.bombType = "GREEN";
-                break;
-                case 67: //debuging key M 
-                console.log("this key(C) is for testing");
-                parentThis.bombType = 0;
                 break;
                 ////////////////////////
                 case 37:
@@ -119,11 +102,11 @@ function playerComponnet(){
                 case 32:
                 //create bomb object 2 be droppped if player has a bomb ready
                 //console.log("the array size is: " +player1.bombsAwayArray.length);
-                if(parentThis.bombsAwayArray.length > 0){
+                if(parentThis.bombsAwayArray.length > 0 && mapGrid[parentThis.y/canvasHEIGHTblock][parentThis.x/canvasWIDTHblock] != "BLUE"){
                     var tempBomb = parentThis.bombsAwayArray.pop();
                     console.log("temp bomb was popped: " + tempBomb);
                     dropBomb(tempBomb,parentThis);
-                }else if(parentThis.bombsAwayArray.length < 1){
+                }else if(parentThis.bombsAwayArray.length < 1 && parentThis.hearts > 0){
                     if(parentThis.bombCapacity > 0){
                         var bomb007 = new droppedBomb(parentThis.x,parentThis.y,parentThis.power);
                     }else{
@@ -148,9 +131,9 @@ function drawPlayer(){
 
 function checkPlayerHealth(playerObject){
     if(playerObject.hearts < 1){
-        console.log("you have been hit ; game over");
-        playerObject.x = 0;
-        playerObject.y = 0;
+        //console.log("you have been hit ; game over");
+        playerObject.x = 1*canvasWIDTHblock;
+        playerObject.y = 1*canvasHEIGHTblock;
     }
 }
 

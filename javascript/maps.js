@@ -1,4 +1,4 @@
-var tileNine = new Image();  // 1
+var tileNine = new Image();  // 9
 tileNine.src = "assets/tiles/unseen.png";
 
 var tileEight = new Image();  // 8
@@ -6,6 +6,9 @@ tileEight.src = "assets/stone_2_gray0.png";
 
 var tileZero = new Image();  // 0
 tileZero.src = "assets/tiles/metal_wall.png";
+
+var tileOne = new Image();  // 1
+tileOne.src = "assets/tiles/sand_Tile.png";
 
 
 /* these are the tiles for unique fires on mapGrid */
@@ -53,7 +56,7 @@ function drawMapGrid(){
 				ctx.drawImage(tileZero,columnXcount*canvasWIDTHblock,rowYcount*canvasHEIGHTblock,canvasWIDTHblock,canvasHEIGHTblock);
 			}
 			if(mapGrid[rowYcount][columnXcount] == 1){
-				ctx.drawImage(tileZero,columnXcount*canvasWIDTHblock,rowYcount*canvasHEIGHTblock,canvasWIDTHblock,canvasHEIGHTblock);
+				ctx.drawImage(tileOne,columnXcount*canvasWIDTHblock,rowYcount*canvasHEIGHTblock,canvasWIDTHblock,canvasHEIGHTblock);
 			}
 			//// these if statements are for unique fires
 			if(mapGrid[rowYcount][columnXcount] == "GREY"){

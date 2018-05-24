@@ -1,5 +1,57 @@
 
-    #canvasMain{
-    width: 90vw;
-    height: 90vh;
+#canvasMain{
+    width: 98vw;
+    height: 97vh;
+    
+}
+
+#buttonUP{
+    position: absolute;
+
+    top: 75vh;
+    left: 6vw;
+
+    height: 7vh;
+    width: 5vw;
+
+}
+
+#buttonDOWN{
+    position: absolute;
+
+    top: 89vh;
+    left: 6vw;
+
+    height: 7vh;
+    width: 5vw;
+}
+
+#buttonLEFT{
+    position: absolute;
+
+    top: 82vh;
+    left: 1vw;
+    height: 7vh;
+    width: 5vw;
+    
+}
+
+#buttonRIGHT{
+    position: absolute;
+
+    top: 82vh;
+    left: 11vw;
+    height: 7vh;
+    width: 5vw;
+}
+
+#buttonCENTER{
+    position: absolute;
+
+
+    top: 82vh;
+    left: 6vw;
+
+    height: 7vh;
+    width: 5vw;
 }

@@ -1,0 +1,51 @@
+
+#canvasMain{
+    width: 99vw;
+    height: 99vh;
+}
+
+#buttonUP{
+    position: absolute;
+    top: 61vh;
+    left: 5vw;
+
+    height: 5vw;
+    width: 7vh;
+}
+
+#buttonDOWN{
+    position: absolute;
+    top: 81vh;
+    left: 5vw;
+
+    height: 5vw;
+    width: 7vh;
+}
+
+#buttonLEFT{
+    position: absolute;
+    top: 71vh;
+    left: 1vw;
+
+    height: 5vw;
+    width: 7vh;
+    
+}
+
+#buttonRIGHT{
+    position: absolute;
+    top: 71vh;
+    left: 9vw;
+
+    height: 5vw;
+    width: 7vh;
+}
+
+#buttonCENTER{
+    position: absolute;
+    top: 71vh;
+    left: 5vw;
+
+    height: 5vw;
+    width: 7vh;
+}
