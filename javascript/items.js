@@ -158,6 +158,7 @@ function generateItemChance(x,y){
 
 function generateItem(x,y){
     var randomNumber = Math.floor(Math.random() * 13);
+    //var randomNumber = 6;
     switch(randomNumber) {
         case 0:
             var newItem = new itemBombUp(x,y);

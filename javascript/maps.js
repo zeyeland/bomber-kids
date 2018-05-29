@@ -61,8 +61,8 @@ function drawMapGrid(){
 			//// these if statements are for unique fires
 			if(mapGrid[rowYcount][columnXcount] == "GREY"){
 				ctx.drawImage(tileFire,columnXcount*canvasWIDTHblock,rowYcount*canvasHEIGHTblock,canvasWIDTHblock,canvasHEIGHTblock);
-				if(player1.x/canvasWIDTHblock == columnXcount && player1.y/canvasHEIGHTblock == rowYcount){
-					player1.hearts --;
+				if( bombArray.includes(objectGrid[rowYcount][columnXcount]) ){
+					objectGrid[rowYcount][columnXcount].power = 15;
 				}
 			}
 			if(mapGrid[rowYcount][columnXcount] == "BLUE"){
@@ -75,7 +75,7 @@ function drawMapGrid(){
 			if(mapGrid[rowYcount][columnXcount] == "GREEN"){
 				ctx.drawImage(tileGrass,columnXcount*canvasWIDTHblock,rowYcount*canvasHEIGHTblock,canvasWIDTHblock,canvasHEIGHTblock);
 				if( bombArray.includes(objectGrid[rowYcount][columnXcount]) ){
-					objectGrid[rowYcount][columnXcount].bombImage.src = "";
+					objectGrid[rowYcount][columnXcount].bombImage.src = null;
 				}
 			}
 		}//end of inner for

@@ -1,51 +1,73 @@
 
 #canvasMain{
-    width: 99vw;
-    height: 99vh;
+    width: 98vw;
+    height: 97vh;
+    touch-action: manipulation;
 }
 
 #buttonUP{
     position: absolute;
-    top: 61vh;
-    left: 5vw;
 
-    height: 5vw;
-    width: 7vh;
+    top: 36vh;
+    left: 11vw;
+
+    height: 14vh;
+    width: 10vw;
+
+    opacity: 0.5;
+
+    touch-action: manipulation;
+
 }
 
 #buttonDOWN{
     position: absolute;
-    top: 81vh;
-    left: 5vw;
 
-    height: 5vw;
-    width: 7vh;
+    top: 64vh;
+    left: 11vw;
+
+    height: 14vh;
+    width: 10vw;
+
+    opacity: 0.5;
+    touch-action: manipulation;
 }
 
 #buttonLEFT{
     position: absolute;
-    top: 71vh;
-    left: 1vw;
 
-    height: 5vw;
-    width: 7vh;
+    top: 50vh;
+    left: 1vw;
+    height: 14vh;
+    width: 10vw;
+
+    opacity: 0.5;
+    touch-action: manipulation;
     
 }
 
 #buttonRIGHT{
     position: absolute;
-    top: 71vh;
-    left: 9vw;
 
-    height: 5vw;
-    width: 7vh;
+    top: 50vh;
+    left: 21vw;
+    height: 14vh;
+    width: 10vw;
+
+    opacity: 0.5;
+    touch-action: manipulation;
 }
 
 #buttonCENTER{
     position: absolute;
-    top: 71vh;
-    left: 5vw;
 
-    height: 5vw;
-    width: 7vh;
+
+    top: 50vh;
+    left: 11vw;
+
+    height: 14vh;
+    width: 10vw;
+
+    opacity: 0.5;
+    touch-action: manipulation;
 }

@@ -12,7 +12,7 @@ function playerComponnet(){
     this.bombsAwayArray = [];
     //
     this.power = 1;
-    this.hearts = 1;
+    this.hearts = 3;
     this.bombCapacity = 1;
     //
     

@@ -33,7 +33,7 @@ function destructibleBlock(x,y){
             //this.timer = 0;
         }
         
-        if(this.blockImage.src == "https://localhost//bomber-kids/assets/passed_sprites/shatter_Block.png"){
+        if(this.blockImage.src.search("assets/passed_sprites/shatter_Block.png") > 0){
             this.timer++;  
             //console.log(this.blockImage.src);
         }
